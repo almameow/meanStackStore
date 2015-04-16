@@ -1,0 +1,46 @@
+<div ng-controller="ProductsController">
+	<div class="row">
+		<!-- Side bar -->
+		<div class="col-xs-2">
+			<!-- Filter box -->
+			<input type="text" ng-model="filter_name" placeholder="Search...">
+	
+			<!-- Form to add new product -->
+			<h4 class="text-primary">Add a new product</h4>
+			<form>
+				<div class="form-group">
+					<label for="name">Product Name:</label>
+					<input type="text" class="form-control" id="name" name="name" ng-model="new_product.name">
+				</div>
+				<div class="form-group">
+					<label for="image">Image (url):</label>
+					<input type="text" class="form-control" id="image" ng-model="new_product.url">
+				</div>
+				<div class="form-group">
+					<label for="desc">Description:</label>
+					<textarea class="form-control" id="desc" rows="3" ng-model="new_product.description"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="quantity">Initial Quantity:</label>
+					<input type="number" min="0" class="form-control" id="quantity" ng-model="new_product.quantity">
+				</div>
+				<input type="submit" value="Create" class="btn btn-primary" ng-click="addproduct()">
+			</form>
+			<p>{{errormsg}}</p>
+		</div>
+	
+
+		<!-- Body -->
+		<div class="col-xs-10">
+			<!-- Product images-->
+			<div class="row">
+				<!-- Each product box -->
+				<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name'">
+					<img src="{{product.url}}" class="img-responsive img-rounded" width="140px" height="140px" alt="{{product.name}}">
+					<h5 ng-bind="product.name"></h5>
+					<p>( {{product.quantity}} left )</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

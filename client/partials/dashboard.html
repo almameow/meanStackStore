@@ -1,0 +1,46 @@
+<div>
+	<div class="row">
+		<!-- Side bar with filter box -->
+		<div class="col-xs-2">
+			<input type="text" ng-model="filter_name" placeholder="Search...">
+		</div>
+
+		<!-- Body -->
+		<div class="col-xs-10">
+			<!-- Product images-->
+			<div class="row" ng-controller="ProductsController">
+				<!-- Each product box -->
+				<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name' | limitTo: quantity">
+					<img src="./{{product.url}}" class="img-responsive img-rounded" width="140px" height="140px" alt="{{product.name}}">
+					<h5 ng-bind="product.name"></h5>
+					<p>( {{product.quantity}} left )</p>
+				</div>
+				<div class="col-xs-10 text-center">
+					<a href="#/products">Show more</a>
+				</div>
+			</div>
+
+			<!-- Recent Orders -->
+			<div class="row" ng-controller="OrdersController">
+				<h4>Recent Orders</h4>
+				<p ng-repeat="order in orders | filter:filter_name | orderBy: $index :reverse | limitTo: quantity">
+					<span ng-bind="order.name"></span> purchased <span ng-bind="order.quantity"></span> <span ng-bind="order.product"></span>
+				</p>
+				<div class="col-xs-10 text-center">
+					<a href="#/orders">Show all orders</a>
+				</div>
+			</div>
+
+			<!-- New Customers -->
+			<div class="row" ng-controller="CustomersController">
+				<h4>New Customers</h4>
+				<p ng-repeat="customer in customers | filter: filter_name | orderBy: $index :reverse | limitTo: quantity">
+					<span ng-bind="customer.name"></span> joined the store on <span ng-bind="customer.date | date:'MM/dd/yyyy'">.
+				</p>
+				<div class="col-xs-10 text-center">
+					<a href="#/customers">Show all customers</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

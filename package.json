@@ -1,0 +1,8 @@
+{
+  "name": "Mini_Store",
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "mongoose": "*"
+  }
+}
