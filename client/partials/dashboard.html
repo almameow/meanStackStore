@@ -1,19 +1,15 @@
 <div class="row">
-	<!-- Side bar -->
-	<div class="col-xs-2">
-		<input type="text" ng-model="filter_name" placeholder="Search...">
-	</div>
 
-	<!-- Body -->
-	<div class="col-xs-10">
+	<!-- Content -->
+	<div class="col-xs-12">
 
 		<!-- Product images-->
 		<div class="row" ng-controller="ProductsController">
 			<!-- Each product box -->
 			<div class="col-xs-12">
-				<h4>Recent Products</h4>
-				<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name' | limitTo: quantity">
-					<img src="./images/{{product.url}}" class="img-responsive img-rounded" width="140px" height="140px" alt="{{product.name}}">
+				<h3>Recent Products</h3>
+				<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: '-createdAt' | limitTo: quantity">
+					<img src="{{product.url}}" class="img-responsive img-rounded" width="300px" height="300px" alt="{{product.name}}">
 					<h5 ng-bind="product.name"></h5>
 					<p>( {{product.quantity}} left )</p>
 				</div>
@@ -22,6 +18,10 @@
 			<div class="row">
 				<div class="col-xs-12 text-center">
 					<a href="#/products">Show more</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2 base-line ">
 				</div>
 			</div>
 		</div>
@@ -39,6 +39,10 @@
 					<a href="#/orders">Show all orders</a>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2 base-line ">
+				</div>
+			</div>
 		</div>
 
 		<!-- New Customers -->
@@ -52,6 +56,10 @@
 			<div class="row">
 				<div class="col-xs-12 text-center">
 					<a href="#/customers">Show all customers</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2 base-line ">
 				</div>
 			</div>
 		</div>

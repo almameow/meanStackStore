@@ -1,6 +1,7 @@
 ////// Products Controller
 storeModule.controller("ProductsController", function($scope, ProductFactory){
-	$scope.quantity = 5;
+	$scope.quantity = 4;
+
 	// immediately run the getProducts function to load all products from db onto browser
 	ProductFactory.getProducts(function(data){
 		$scope.products = data;
