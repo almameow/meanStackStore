@@ -8,7 +8,9 @@ var ProductSchema = new mongoose.Schema({
 	name: String,
 	url: String,
 	desc: String,
-	quantity: Number
+	quantity: Number,
+	category: String,
+	createdAt: {type:Date, default: Date.now}
 });
 
 mongoose.model('Product', ProductSchema);

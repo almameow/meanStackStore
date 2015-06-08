@@ -3,44 +3,79 @@
 		<!-- Side bar -->
 		<div class="col-xs-2">
 			<!-- Filter box -->
-			<input type="text" ng-model="filter_name" placeholder="Search...">
-	
-			<!-- Form to add new product -->
-			<h4 class="text-primary">Add a new product</h4>
-			<form>
-				<div class="form-group">
-					<label for="name">Product Name:</label>
-					<input type="text" class="form-control" id="name" name="name" ng-model="new_product.name">
-				</div>
-				<div class="form-group">
-					<label for="image">Image (url):</label>
-					<input type="text" class="form-control" id="image" ng-model="new_product.url">
-				</div>
-				<div class="form-group">
-					<label for="desc">Description:</label>
-					<textarea class="form-control" id="desc" rows="3" ng-model="new_product.description"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="quantity">Initial Quantity:</label>
-					<input type="number" min="0" class="form-control" id="quantity" ng-model="new_product.quantity">
-				</div>
-				<input type="submit" value="Create" class="btn btn-primary" ng-click="addproduct()">
-			</form>
-			<p>{{errormsg}}</p>
-		</div>
-	
-
-		<!-- Body -->
-		<div class="col-xs-10">
-			<!-- Product images-->
 			<div class="row">
-				<!-- Each product box -->
-				<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name'">
-					<img src="{{product.url}}" class="img-responsive img-rounded" width="140px" height="140px" alt="{{product.name}}">
-					<h5 ng-bind="product.name"></h5>
-					<p>( {{product.quantity}} left )</p>
+				<div class="col-xs-12">
+					<input class="col-xs-12" type="text" ng-model="filter_name" placeholder="Search...">
+				</div>
+			</div>
+			<!-- Form to add new product -->
+			<!-- Form validation done on front end -->
+			<div class="row">
+				<div class="col-xs-12">
+					<h4 class="margin-top">Add a new product</h4>
+					<p class="text-danger">{{errormsg}}</p>
+					<form name="form" novalidate>
+						<div class="form-group">
+							<label for="name">Product Name:</label>
+							<input type="text" class="form-control" id="name" name="name" ng-model="new_product.name" required="">
+							<div ng-show="form.$submitted || form.name.$touched">
+								<div ng-show="form.name.$error.required" class="text-danger">Product name is required</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="category">Category:</label>
+							<select class="form-control" id="category" name="category" ng-model="new_product.category" required="">
+								<option value="accessory">Accessory</option>
+								<option value="shirt">Shirt/Coat</option>
+								<option value="pant">Pants</option>
+								<option value="shoe">Shoes</option>
+							</select>
+							<div ng-show="form.$submitted || form.category.$touched">
+								<div ng-show="form.category.$error.required" class="text-danger">Product category is required</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="image">Image <small>(URL; For best results, please submit 300x300px image)</small>:</label>
+							<input type="text" class="form-control" id="image" ng-model="new_product.url" name="image" required="">
+							<div ng-show="form.$submitted || form.image.$touched">
+								<div ng-show="form.image.$error.required" class="text-danger">Product image is required</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="desc">Description:</label>
+							<textarea class="form-control" id="desc" rows="3" ng-model="new_product.description" name="description" required=""></textarea>
+							<div ng-show="form.$submitted || form.description.$touched">
+								<div ng-show="form.description.$error.required" class="text-danger">Product description is required</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="quantity">Initial Quantity:</label>
+							<input type="number" min="0" class="form-control" id="quantity" ng-model="new_product.quantity" name="quantity" required="">
+							<div ng-show="form.$submitted || form.quantity.$touched">
+								<div ng-show="form.quantity.$error.required" class="text-danger">Product quantity is required</div>
+							</div>
+						</div>
+						<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="addproduct(form)">
+					</form>
 				</div>
 			</div>
 		</div>
+	
+
+		<!-- Content -->
+		<div class="col-xs-10">
+			<!-- Product images-->
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- Each product box -->
+					<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name'">
+						<img src="./images/{{product.url}}" class="img-responsive img-rounded" width="300px" height="300px" alt="{{product.name}}">
+						<h5 ng-bind="product.name"></h5>
+						<p>( {{product.quantity}} left )</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>

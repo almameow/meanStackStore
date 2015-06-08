@@ -1,44 +1,41 @@
 <div ng-controller="CustomersController">
 	<!-- Form to add customer -->
-	<div class="row">
-		<div class="col-xs-12">
-			<h4 class="text-primary">Add a new customer</h4>
-			<form class="col-xs-3">
-				<div class="form-group">
-					<label for="name">Customer Name:</label>
-					<input type="text" class="form-control" id="name" ng-model="new_customer.name">
-				</div>
-				<input type="submit" class="btn btn-primary" ng-click="addcustomer()">
-			</form>
-		</div>
+	<div class="col-xs-12">
+		<h4 class="text-primary">Add a new customer</h4>
+		<form class="col-xs-3">
+			<div class="form-group">
+				<label for="name">Customer Name:</label>
+				<input type="text" class="form-control" id="name" ng-model="new_customer.name">
+			</div>
+			<input type="submit" class="btn btn-primary" ng-click="addcustomer()">
+		</form>
+		<p class="text-danger">{{errormsg}}</p>
 	</div>
+
 
 	<!-- Filter box -->
-	<div class="row">
-		<div class="col-xs-3 col-xs-offset-10">
-			<!-- Define the filter filter "filter_name" -->
-			<input type="text" ng-model="filter_name" placeholder="Filter...">
-		</div>
+	<div class="col-xs-3 col-xs-offset-10">
+		<!-- Define the filter filter "filter_name" -->
+		<input type="text" ng-model="filter_name" placeholder="Filter...">
 	</div>
+
 
 	<!-- Table listing customers -->
-	<div class="row">
-		<div class="col-xs-12">
-			<table class="table table-striped">
-				<thead>
-					<th>Customer Name</th>
-					<th>Created Date</th>
-					<th>Actions</th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="customer in customers | filter: filter_name">
-						<td><span ng-bind="customer.name"></span></td>
-						<td><span ng-bind="customer.date | date:'MM/dd/yyyy'"></span></td>
-						<td><input type="submit" value="Remove" class="btn btn-danger btn-xs" ng-click="deletecustomer(customer)"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<div class="col-xs-12">
+		<table class="table table-striped">
+			<thead>
+				<th>Customer Name</th>
+				<th>Created Date</th>
+				<th>Actions</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="customer in customers | filter: filter_name">
+					<td><span ng-bind="customer.name"></span></td>
+					<td><span ng-bind="customer.date | date:'MM/dd/yyyy'"></span></td>
+					<td><input type="submit" value="Remove" class="btn btn-danger btn-xs" ng-click="deletecustomer(customer)"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-
+	
 </div>

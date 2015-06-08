@@ -47,11 +47,18 @@ module.exports = (function(){
 		// add order to db
 		order: function(req, res){
 			var newOrder = new Order(req.body);
-
-			Product.findOne({name: req.body.product}, function(error, product){ // Find db quantity of item
+			// If any fields are empty
+			if( req.body == null || req.body.name == "" || req.body.product == "" | req.body.quantity == null ){
+				res.send("Error: All fields must be completed.");
+				console.log("Error: All fields must be completed.")
+			}
+			else{
+				// Find db quantity of item
+				Product.findOne({name: req.body.product}, function(error, product){ 
 				var diff = product.quantity - req.body.quantity;
 
-				if( diff > 0){ // If db quantity - req.body.quantity > 0
+				// If db quantity - req.body.quantity > 0
+				if( diff > 0){ 
 					Product.update({name: req.body.product}, {quantity: diff}, function(error, product){ // update quantity in db
 						console.log("Updated the quantity");
 						// Call .save function
@@ -64,11 +71,13 @@ module.exports = (function(){
 							}
 						});
 					})
-				} else { // Else, throw error
+				} else {
 					console.log("Cannot buy more than is in stock");
-					res.end();
+					res.send("Error: Cannot buy more than is in stock.");
 				}
 			})			
+			}
+			
 		}
 	}
 })();

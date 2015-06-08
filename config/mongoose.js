@@ -8,7 +8,7 @@ var mongoose = require("mongoose");
 var fs = require("fs");
 
 // Connect to the DB
-mongoose.connect('mongodb://localhost/Mini_Store');
+mongoose.connect('mongodb://localhost/VIXX_Store');
 
 // Specify the path to all of the models
 var models_path = __dirname + "/../server/models";
