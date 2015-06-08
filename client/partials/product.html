@@ -1,0 +1,13 @@
+<div ng-controller="OneProductController">
+	<div class="row">
+		<div class="col-xs-3">
+			<img src="{{product.url}}" width="100%" alt="{{product.name}}">
+		</div>
+		<div class="col-xs-9">
+			<h2>{{product.name}}</h2>
+			<p><strong>Category:</strong> {{product.category}}</p>
+			<p><strong>Quantity in stock:</strong> {{product.quantity}}</p>
+			<button class="btn btn-primary" ng-click="removeProduct(product)">Delete</button>
+		</div>
+	</div>
+</div>

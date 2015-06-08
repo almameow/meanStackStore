@@ -29,12 +29,24 @@ module.exports = function(app){
 		customers.delete(request, response);
 	});
 
+	// Add new order
 	app.post("/order", function(request, response){
 		orders.order(request, response);
 	});
 
+	// Add new product
 	app.post("/add_product", function(request, response){
 		products.add(request, response);
 	});
+
+	// Show specific product
+	app.post('/get_product/:id', function(req, res){
+		products.getOneProduct(req, res);
+	})
+
+	// Remove product
+	app.post('/remove_product', function(req, res) {
+		products.remove(req, res);
+	})
 	
 }

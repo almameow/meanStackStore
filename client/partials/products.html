@@ -1,5 +1,3 @@
-
-
 <div ng-controller="ProductsController">
 	<div class="row">
 		<!-- Side bar -->
@@ -23,11 +21,16 @@
 				</div>
 			</div>
 
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 base-line">
+				</div>
+			</div>
+
 			<!-- Form to add new product -->
 			<!-- Form validation done on front end -->
 			<div class="row">
 				<div class="col-xs-12">
-					<h4>Add a new product</h4>
+					<h4 class="margin-top">Add a new product</h4>
 					<p class="text-danger">{{errormsg}}</p>
 					<form name="form" novalidate>
 						<div class="form-group">
@@ -57,13 +60,6 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="desc">Description:</label>
-							<textarea class="form-control" id="desc" rows="3" ng-model="new_product.description" name="description" required=""></textarea>
-							<div ng-show="form.$submitted || form.description.$touched">
-								<div ng-show="form.description.$error.required" class="text-danger">Product description is required</div>
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="quantity">Initial Quantity:</label>
 							<input type="number" min="0" class="form-control" id="quantity" ng-model="new_product.quantity" name="quantity" required="">
 							<div ng-show="form.$submitted || form.quantity.$touched">
@@ -84,9 +80,11 @@
 				<div class="col-xs-12">
 					<!-- Each product box -->
 					<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name'">
-						<img src="{{product.url}}" width="300px" height="300px" alt="{{product.name}}">
-						<h5 ng-bind="product.name"></h5>
-						<p>( {{product.quantity}} left )</p>
+						<a href="#/product/{{product._id}}">
+							<img src="{{product.url}}" width="300px" height="300px" alt="{{product.name}}">
+							<h5 class="text-center" ng-bind="product.name"></h5>
+						</a>
+						<p class="text-center">( {{product.quantity}} left )</p>
 					</div>
 				</div>
 			</div>

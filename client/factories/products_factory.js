@@ -3,6 +3,7 @@ storeModule.factory("ProductFactory", function($http){
 	var factory = {};
 	var products = [];
 
+	// get all products
 	factory.getProducts = function(callback){
 		$http.get("/products").success(function(output){
 			products = output;
@@ -19,6 +20,20 @@ storeModule.factory("ProductFactory", function($http){
 			callback(output);
 		})
 	};
-	// Return the factory so that everything inside of it is available to the CustomerController
+
+	// get one product with specific ID
+	factory.getOneProduct = function(data, callback){
+		$http.post('/get_product/'+ data).success(function(data){
+			callback(data);
+		})
+	};
+
+	// remove a quiz from the database
+	factory.removeProduct = function(info, callback) {
+		$http.post('/remove_product', info).success(function(output){
+			callback(output);
+		})
+	};
+	
 	return factory;
 });

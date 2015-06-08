@@ -40,6 +40,30 @@ module.exports = (function(){
 					});
 				}
 			})
+		},
+
+		remove: function(req, res) {
+			Product.remove({_id: req.body._id}, function(err, response) {
+				if(err) {
+					console.log('Product was not deleted.');
+				}
+				else {
+					console.log("Product was successfully deleted.");
+					res.json(response);
+				}
+			})
+		},
+
+		getOneProduct: function(req, res){
+			Product.find({_id: req.params.id}, function(err, data){
+				if(err)
+				{
+					console.log("Error: Product was not grabbed from the database.");
+				} else {
+					console.log("Product successfully grabbed from database.")
+					res.json(data[0]);
+				}
+			})
 		}
 	}
 })();

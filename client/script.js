@@ -16,6 +16,9 @@ storeModule.config(function ($routeProvider){
 		.when("/customers", {
 			templateUrl: "partials/customers.html"
 		})
+		.when("/product/:id", {
+			templateUrl: "partials/product.html"
+		})
 		.otherwise({
 			redirectTo: "/"
 		});
