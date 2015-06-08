@@ -1,61 +1,87 @@
 <div ng-controller="OrdersController">
-	<!-- Form to add order -->
 	<div class="row">
-		<div class="col-xs-12">
-			<h4 class="text-primary">Add a new order</h4>
-			<form class="col-xs-3">
-				<div class="form-group">
-					<!-- Customers drop-down -->
-					<label for="customer">Customer Name:</label>
-					<select class="form-control" id="customer" ng-model="newOrder.name" >
-						<option ng-repeat="customer in customers | orderBy: 'name'">{{customer.name}}</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="quantity">Order: </label>
-					<!-- Products drop-down -->
-					<select class="form-control" id="product" ng-model="newOrder.product" >
-						<option ng-repeat="product in products | orderBy: 'name' ">{{product.name}}</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<!-- Quantity drop-down -->
-					<input type="number" min="1" class="form-control" id="quantity" ng-model="newOrder.quantity">
-				</div>
-				<input class="btn btn-primary" type="submit" value="Order" ng-click="addorder()">
-			</form>
-			<p class="text-danger">{{errormsg}}</p>
-		</div>
-	</div>
 
-	<!-- Filter box -->
-	<div class="row">
-		<div class="col-xs-3 col-xs-offset-10">
-			<!-- Define the filter filter "filter_name" -->
-			<input type="text" ng-model="filter_name" placeholder="Filter...">
-		</div>
-	</div>
+		<div class="col-xs-2">
+			<!-- Filter box -->
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- Define the filter filter "filter_name" -->
+					<input class="col-xs-12" type="text" ng-model="filter_name" placeholder="Filter Results...">
+				</div>
+			</div>
 
-	<!-- Table listing customers -->
-	<div class="row">
-		<div class="col-xs-12">
-			<table class="table table-striped">
-				<thead>
-					<th>Customer Name</th>
-					<th>Product</th>
-					<th>Quantity</th>
-					<th>Date</th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="order in orders | filter:filter_name | orderBy: $index">
-						<td><span ng-bind="order.name"></span></td>
-						<td><span ng-bind="order.product"></span></td>
-						<td><span ng-bind="order.quantity"></span></td>
-						<td><span ng-bind="order.date | date:'MM/dd/yyyy'"></span></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+			<div class="row margin-top">
+				<div class="col-xs-10 col-xs-offset-1 base-line">
+				</div>
+			</div>
 
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Add a new order</h3>
+				</div>
+			</div>
+			
+			<!-- Form to add order -->
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="text-danger">{{errormsg}}</p>
+					<div ng-show="form.$submitted || form.name.$touched">
+						<div ng-show="form.name.$error.required" class="text-danger">Customer name is required</div>
+					</div>
+					<form name="form" novalidate>
+						<div class="form-group">
+							<label for="customer">Customer Name:</label>
+							<select class="form-control" id="customer" ng-model="newOrder.name" required="">
+								<option ng-repeat="customer in customers | orderBy: 'name'">{{customer.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="product">Product Name: </label>
+							<select class="form-control" id="product" ng-model="newOrder.product" required="">
+								<option ng-repeat="product in products | orderBy: 'name' ">{{product.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="quantity">Product Quantity: </label>
+							<input type="number" min="1" class="form-control" id="quantity" ng-model="newOrder.quantity" required="">
+						</div>
+						<input class="btn btn-primary" type="submit" value="Order" ng-disabled="form.$invalid" ng-click="addorder(form)">
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-10">
+			<!-- Table listing customers -->
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>All Orders</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<table class="table table-condensed">
+						<thead>
+							<th>Customer Name</th>
+							<th>Product Name</th>
+							<th>Product Quantity</th>
+							<th>Date Added</th>
+							<th></th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="order in orders | filter:filter_name | orderBy: $index">
+								<td><span ng-bind="order.name"></span></td>
+								<td><span ng-bind="order.product"></span></td>
+								<td><span ng-bind="order.quantity"></span></td>
+								<td><span ng-bind="order.date | date:'MM/dd/yyyy'"></span></td>
+								<td><input type="submit" value="Delete" class="btn btn-primary btn-xs" ng-click="deleteorder(order)"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

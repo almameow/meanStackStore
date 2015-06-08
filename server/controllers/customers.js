@@ -21,31 +21,25 @@ module.exports = (function(){
 		add: function(req, res) {
 			// Create new model
 			var newCustomer = new Customer(req.body);
-			console.log(req.body);
-			if( req.body.name === undefined || req.body.name == ""){
-				res.send("Error: Name field must be completed.");
-				console.log("Error: Name field must be completed.")
-			}
-			else{
-				// If customer with same name as user input already exists in db, do not add to db
-				Customer.findOne({name: req.body.name}, function(error, response){ 
-					if(response){ //customer exists
-						console.log("Customer already exists in db");
-						res.send("Error: A customer with this name already exists.");
-					}
-					else{
-						// Call .save function
-						newCustomer.save(function(error, results){
-							if(error){
-								console.log("Did not save new customer to db");
-							} else {
-								console.log("Successfully saved new customer to db");
-								res.json(results);
-							}
-						});
-					}
-				})
-			}
+
+			// If customer with same name as user input already exists in db, do not add to db
+			Customer.findOne({name: req.body.name}, function(error, response){ 
+				if(response){ //customer exists
+					console.log("Customer already exists in db");
+					res.send("A customer with this name already exists.");
+				}
+				else{
+					// Call .save function
+					newCustomer.save(function(error, results){
+						if(error){
+							console.log("Did not save new customer to db");
+						} else {
+							console.log("Successfully saved new customer to db");
+							res.json(results);
+						}
+					});
+				}
+			})
 		},
 
 		// Remove customer from db

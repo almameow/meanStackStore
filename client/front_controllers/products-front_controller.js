@@ -1,6 +1,6 @@
 ////// Products Controller
 storeModule.controller("ProductsController", function($scope, ProductFactory){
-	$scope.quantity = 4;
+	$scope.quantity = 5;
 
 	// immediately run the getProducts function to load all products from db onto browser
 	ProductFactory.getProducts(function(data){
@@ -11,7 +11,7 @@ storeModule.controller("ProductsController", function($scope, ProductFactory){
 	$scope.addproduct = function(){
 		console.log($scope.new_product);
 		ProductFactory.addProduct($scope.new_product, function(info){
-			if( info === "Error: A product with this name already exists"){
+			if( info === "A product with this name already exists"){
 				$scope.errormsg = info;
 			}
 			else{

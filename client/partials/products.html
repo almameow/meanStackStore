@@ -81,7 +81,7 @@
 					<!-- Each product box -->
 					<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: 'name'">
 						<a href="#/product/{{product._id}}">
-							<img src="{{product.url}}" width="300px" height="300px" alt="{{product.name}}">
+							<img src="{{product.url}}" alt="{{product.name}}">
 							<h5 class="text-center" ng-bind="product.name"></h5>
 						</a>
 						<p class="text-center">( {{product.quantity}} left )</p>

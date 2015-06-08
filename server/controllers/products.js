@@ -26,7 +26,7 @@ module.exports = (function(){
 			Product.findOne({name: req.body.name}, function(error, response){ 
 				if(response){ //product exists
 					console.log("Product name already exists in db");
-					res.send("Error: A product with this name already exists");
+					res.send("A product with this name already exists");
 				}
 				else{
 					// Call .save function

@@ -17,6 +17,7 @@ ul {
 	list-style-type: none;
 	padding-left: 20px;
 }
+
 /* Navbar */
 .navbar {
 	font-weight: lighter;
@@ -24,7 +25,7 @@ ul {
 	font-size: 16px;
 }
 .navbar-brand{
-	font-family: "BaronNeue";
+	font-family: "BaronNeue", sans-serif;
 	font-size: 30px;
 	letter-spacing: 1px;
 	padding-right: 5px;
@@ -36,29 +37,10 @@ ul {
 	color: #9d9d9d;
 }
 
-/*** MISC ***/
-.image_box{
-	display: inline-block;
-	width: 300px;
-	min-height: 365px;
-	margin: 10px;
-}
-.image_box img{
-	border-radius: 30px;
-}
-.margin-top{
-	margin-top: 25px;
-}
-.base-line{
-	padding-top: 5px;
-	border-bottom: 1px dashed #9d9d9d;
-}
-
-
 /*** Forms ***/
 /* Custom buttons */
 .btn {
-	font-family: "BaronNeue";
+	font-family: "BaronNeue", sans-serif;
 	font-size: 20px;
 	letter-spacing: 1px;
     text-transform: uppercase;
@@ -105,4 +87,27 @@ input[type='radio']:before {
 }
 input[type='radio']:checked:before {
 	background-color: #333333;
+}
+
+/*** MISC ***/
+.image_box{
+	display: inline-block;
+	width: 250px;
+	min-height: 300px;
+	margin: 10px;
+}
+.image_box img{
+	border-radius: 30px;
+	width: 250px;
+	height: 250px;
+}
+.margin-top{
+	margin-top: 25px;
+}
+.margin-bottom{
+	margin-bottom: 25px;
+}
+.base-line{
+	padding-top: 5px;
+	border-bottom: 1px dashed #9d9d9d;
 }

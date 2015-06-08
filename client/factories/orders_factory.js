@@ -26,13 +26,17 @@ storeModule.factory("OrderFactory", function($http){
 		})
 	};
 
-	// make AJAX request to /order to add order to db
+	// add order to db
 	factory.addOrder = function(info, callback){
 		$http.post("/order", info).success(function(output){
-			// This callback will be the getCustomer function which will update the list on the browser
 			callback(output);
 		})
 	};
-	// Return the factory so that everything inside of it is available to the CustomerController
+
+	factory.deleteOrder = function(info, callback){
+		$http.post("/remove_order/" + info).success(function(output){
+			callback();
+		})	
+	};
 	return factory;
 });

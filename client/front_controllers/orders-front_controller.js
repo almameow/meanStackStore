@@ -1,6 +1,6 @@
 ////// Orders Controller
 storeModule.controller("OrdersController", function($scope, OrderFactory){
-	$scope.quantity = 3;
+	$scope.quantity = 4;
 
 	// immediately run the getOrders, getCustomers, and getProducts functions to load all orders and users from db onto browser
 	OrderFactory.getOrders(function(data){
@@ -19,7 +19,7 @@ storeModule.controller("OrdersController", function($scope, OrderFactory){
 	$scope.addorder = function(){
 		console.log($scope.newOrder);
 		OrderFactory.addOrder($scope.newOrder, function(info){
-			if( info === "Error: Cannot buy more than is in stock." || info === "Error: All fields must be completed."){
+			if(info === "Cannot buy more than is in stock."){
 				$scope.errormsg = info;
 			}
 			else{
@@ -29,6 +29,21 @@ storeModule.controller("OrdersController", function($scope, OrderFactory){
 				$scope.orders = data;
 				$scope.new_order = {};
 			})
+
+			//Reset form
+			if (form) {
+				$scope.form.$setPristine();
+				$scope.form.$setUntouched();
+			}
 		});
 	};
+
+	$scope.deleteorder = function(data){
+		console.log(data._id);
+		OrderFactory.deleteOrder(data._id, function(){
+			OrderFactory.getOrders(function(info){
+				$scope.orders = info;
+			})
+		})
+	}
 });

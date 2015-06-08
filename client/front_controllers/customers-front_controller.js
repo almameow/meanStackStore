@@ -1,6 +1,6 @@
 ////// Customers Controller
 storeModule.controller("CustomersController", function($scope, CustomerFactory){
-	$scope.quantity = 3;
+	$scope.quantity = 4;
 
 	CustomerFactory.getCustomers(function(data){
 		$scope.customers = data;
@@ -8,7 +8,7 @@ storeModule.controller("CustomersController", function($scope, CustomerFactory){
 
 	$scope.addcustomer = function(){
 		CustomerFactory.addCustomer($scope.new_customer, function(info){
-			if( info === "Error: Name field must be completed." || info === "Error: A customer with this name already exists."){
+			if(info === "A customer with this name already exists."){
 				$scope.errormsg = info;
 			}
 			else{

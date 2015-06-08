@@ -7,6 +7,7 @@
 			<h2>{{product.name}}</h2>
 			<p><strong>Category:</strong> {{product.category}}</p>
 			<p><strong>Quantity in stock:</strong> {{product.quantity}}</p>
+			<p><strong>Date added to inventory:</strong> <span ng-bind="product.createdAt | date:'MM/dd/yyyy'"></span></p>
 			<button class="btn btn-primary" ng-click="removeProduct(product)">Delete</button>
 		</div>
 	</div>

@@ -5,48 +5,42 @@ var products = require("./../server/controllers/products.js");
 
 module.exports = function(app){
 	// Get Requests to pull all customers, orders, products from DB
-	app.get("/customers", function(req, res){
-		customers.show(req, res);
+	app.get("/customers", function(request, response){
+		customers.show(request, response);
 	});
-	app.get("/orders", function(req, res){
-		orders.orders(req, res);
+	app.get("/orders", function(request, response){
+		orders.orders(request, response);
 	});
-	app.get("/products", function(req, res){
-		products.products(req, res);
+	app.get("/products", function(request, response){
+		products.products(request, response);
 	});
 
 
-	// Receive post request via AJAX to /add
-	// Direct request to the customers.add method
-	app.post("/add", function(request, response){
+	// Post requests to add new customers, orders, products to DB
+	app.post("/add_customer", function(request, response){
 		customers.add(request, response);
 	});
-
-	// Receive post request via AJAX to /delete
-	// Direct request to customers.remove method
-	app.post("/delete/:id", function(request, response){
-		// I pass the entire request object to .delete, and select only the id variable from within the .delete() function (I could also pass only the id from here, but for some reason that seems to not be the way its done)
-		customers.delete(request, response);
-	});
-
-	// Add new order
 	app.post("/order", function(request, response){
 		orders.order(request, response);
 	});
-
-	// Add new product
 	app.post("/add_product", function(request, response){
 		products.add(request, response);
 	});
 
-	// Show specific product
-	app.post('/get_product/:id', function(req, res){
-		products.getOneProduct(req, res);
-	})
 
-	// Remove product
-	app.post('/remove_product', function(req, res) {
-		products.remove(req, res);
-	})
-	
+	// Post requests to remove customers, orders, products from DB
+	app.post("/delete/:id", function(request, response){
+		customers.delete(request, response);
+	});
+	app.post("/remove_order/:id", function(request, response){
+		orders.remove(request, response);
+	});
+	app.post('/remove_product', function(request, response) {
+		products.remove(request, response);
+	});
+
+	// Show specific product
+	app.post('/get_product/:id', function(request, response){
+		products.getOneProduct(request, response);
+	});
 }

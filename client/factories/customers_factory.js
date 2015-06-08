@@ -12,7 +12,7 @@ storeModule.factory("CustomerFactory", function($http){
 
 	// make AJAX request to /add in order to add customer to db
 	factory.addCustomer = function(info, callback){
-		$http.post("/add", info).success(function(output){
+		$http.post("/add_customer", info).success(function(output){
 			// This callback will be the getCustomer function which will update the list on the browser
 			callback(output);
 		})

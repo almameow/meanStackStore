@@ -9,19 +9,21 @@
 			<div class="col-xs-12">
 				<h3>Recent Products</h3>
 				<div class="image_box" ng-repeat="product in products | filter:filter_name | orderBy: '-createdAt' | limitTo: quantity">
-					<img src="{{product.url}}" class="img-responsive img-rounded" width="300px" height="300px" alt="{{product.name}}">
-					<h5 class="text-center" ng-bind="product.name"></h5>
+					<a href="#/product/{{product._id}}">
+						<img src="{{product.url}}" class="img-responsive img-rounded" alt="{{product.name}}">
+						<h5 class="text-center" ng-bind="product.name"></h5>
+					</a>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-xs-12 text-center">
-				<a href="#/products">Show all products</a>
+				<a href="#/products">All products</a>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 base-line ">
+			<div class="col-xs-10 col-xs-offset-1 base-line">
 			</div>
 		</div>
 
@@ -29,9 +31,9 @@
 		<div class="row" ng-controller="OrdersController">
 			<div class="col-xs-12">
 				<h3>Recent Orders</h3>
-				<p ng-repeat="order in orders | filter:filter_name | orderBy: $index :reverse | limitTo: quantity">
-					<span ng-bind="order.name"></span> purchased <span ng-bind="order.quantity"></span> <span ng-bind="order.product"></span>
-				</p>
+				<ul ng-repeat="order in orders | filter:filter_name | orderBy: $index :reverse | limitTo: quantity">
+					<li><span ng-bind="order.name"></span> purchased <span ng-bind="order.quantity"></span> <span ng-bind="order.product"></span></li>
+				</ul>
 			</div>
 		</div>
 		<div class="row">
@@ -40,7 +42,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 base-line ">
+			<div class="col-xs-10 col-xs-offset-1 base-line">
 			</div>
 		</div>
 
@@ -48,18 +50,14 @@
 		<div class="row" ng-controller="CustomersController">
 			<div class="col-xs-12">
 				<h3>New Customers</h3>
-				<p ng-repeat="customer in customers | filter: filter_name | orderBy: $index :reverse | limitTo: quantity">
-					<span ng-bind="customer.name"></span> joined the store on <span ng-bind="customer.date | date:'MM/dd/yyyy'">.
-				</p>
+				<ul ng-repeat="customer in customers | filter: filter_name | orderBy: $index :reverse | limitTo: quantity">
+					<li><span ng-bind="customer.name"></span> joined the store on <span ng-bind="customer.date | date:'MM/dd/yyyy'"></li>
+				</ul>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row margin-bottom">
 			<div class="col-xs-12 text-center">
 				<a href="#/customers">Show all customers</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 base-line ">
 			</div>
 		</div>
 

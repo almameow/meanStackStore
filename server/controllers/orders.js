@@ -26,7 +26,6 @@ module.exports = (function(){
 				if(error){
 					console.log(error);
 				} else {
-					// console.log("Customers json results: ", results);
 					res.json(results);
 				}
 			})
@@ -38,7 +37,6 @@ module.exports = (function(){
 				if(error){
 					console.log(error);
 				} else {
-					// console.log("Customers json results: ", results);
 					res.json(results);
 				}
 			})
@@ -47,14 +45,9 @@ module.exports = (function(){
 		// add order to db
 		order: function(req, res){
 			var newOrder = new Order(req.body);
-			// If any fields are empty
-			if( req.body == null || req.body.name == "" || req.body.product == "" | req.body.quantity == null ){
-				res.send("Error: All fields must be completed.");
-				console.log("Error: All fields must be completed.")
-			}
-			else{
-				// Find db quantity of item
-				Product.findOne({name: req.body.product}, function(error, product){ 
+			
+			// Find quantity of item in db
+			Product.findOne({name: req.body.product}, function(error, product){ 
 				var diff = product.quantity - req.body.quantity;
 
 				// If db quantity - req.body.quantity > 0
@@ -70,14 +63,25 @@ module.exports = (function(){
 								res.json(results);
 							}
 						});
-					})
+					});
 				} else {
 					console.log("Cannot buy more than is in stock");
-					res.send("Error: Cannot buy more than is in stock.");
+					res.send("Cannot buy more than is in stock.");
 				}
-			})			
-			}
-			
+			})		
+		},
+
+		// remove order from db
+		remove: function(req, res){
+			console.log("order values: " , req.params);
+			Order.remove({_id: req.params.id}, function(error, results){
+				if(error){
+					console.log("Error removing this order");
+				} else {
+					console.log("Successfully removed order");
+					res.json(results);
+				}
+			}) 
 		}
 	}
 })();
